@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["plugin:react/recommended", "standard-with-typescript"],
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "jsx": true
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier",
+        "import"
+    ],
+    "rules": {
+        "arrow-body-style": "error", // 화살표 함수 사용시 중괄호 필수 사용.
+        "no-var": "error", //'var'변수 선언 금지!
+        "no-unused-vars": "warn", //사용하지 않은 변수에 대해서 경고 표시.
+        "eqeqeq": "error" //강한비교 사용하기 '==='
+
+    }
 }

@@ -14,13 +14,21 @@
     "@types/react-dom": "18.0.9",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
-    "eslint": "8.29.0",
+    "eslint": "^8.0.1",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.4",
-    "typescript": "4.9.4"
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.31.11"
   }
 }
