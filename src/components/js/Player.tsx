@@ -9,11 +9,14 @@ export default function Player() {
         console.log(start)
     }
 
-    return(<>      
+    return(
+    <>      
         <button type="button" onClick={()=>handleStartButtonClick()}>{!start?("▶️"):("⏸")}</button>
         <button type="button">⏹</button>
         <button type="button">⏮</button>
         <button type="button">⏭</button>
+
+        
     </>
     );
 }
