@@ -76,6 +76,8 @@ export default function Player() {
             <p>{currentTime}</p>
             <p>{duration}</p>
         </StTimeWrapper>        
+
+        <a href={jsMusic} download>음원 다운로드</a>
         
     </StPlayerWrapper>
     );
