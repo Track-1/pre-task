@@ -137,7 +137,6 @@ const StProgress=styled.input`
         width: 100%;
         height: 100%;
         cursor: pointer;
-        /* border-radius: 5px; */
         border: 2px solid aliceblue;
     }
 `
