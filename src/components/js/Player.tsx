@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import jsMusic from "../../assets/christmas.mp3";
+import styled from "styled-components";
 
 export default function Player() {
     const audio = useMemo(()=>new Audio(jsMusic),[jsMusic])
@@ -53,13 +54,15 @@ export default function Player() {
 
     
     return(
-    <>      
-        <button type="button" onClick={handlePlay}>{!play?("▶️"):("⏸")}</button>
-        <button type="button" onClick={handleOnload}>⏹</button>
-        <button type="button" onClick={handleOnBackward}>⏮</button>
-        <button type="button" onClick={handleOnForward}>⏭</button>
+    <StPlayerWrapper>     
+        <StButtonWrapper>
+            <button type="button" onClick={handlePlay}>{!play?("▶️"):("⏸")}</button>
+            <button type="button" onClick={handleOnload}>⏹</button>
+            <button type="button" onClick={handleOnBackward}>⏮</button>
+            <button type="button" onClick={handleOnForward}>⏭</button>
+        </StButtonWrapper> 
 
-        <input
+        <StProgress
             type="range"
             min="0"
             max="1000"
@@ -69,11 +72,70 @@ export default function Player() {
             }}
           />
         
-        <section>
+        <StTimeWrapper>
             <p>{currentTime}</p>
             <p>{duration}</p>
-        </section>        
+        </StTimeWrapper>        
         
-    </>
+    </StPlayerWrapper>
     );
 }
+
+const StPlayerWrapper=styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
+
+const StButtonWrapper=styled.div`
+    display: flex;
+
+    margin: 10rem 0 1rem 0;
+
+    & > button{
+        width: 2rem;
+        height: 2rem;
+
+        margin: 0.3rem;
+
+        border: 0.1rem solid skyblue;
+        border-radius: 10rem;
+
+        background-color: aliceblue;
+    }
+`
+
+const StTimeWrapper=styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    width: 20rem;
+`
+
+const StProgress=styled.input`
+    -webkit-appearance: none;
+    width:20rem;
+    background: aliceblue;
+    overflow: hidden;
+
+    &:focus {
+        outline: none;
+    }
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 0.001rem;
+        height: 1rem;
+                
+        background: skyblue;
+        box-shadow: -100vw 0 0 100vw skyblue;
+    }
+
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        /* border-radius: 5px; */
+        border: 2px solid aliceblue;
+    }
+`
