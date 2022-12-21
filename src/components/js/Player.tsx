@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { useEffect, useMemo, useState } from "react";
 import jsMusic from "../../assets/christmas.mp3";
-import styled from "styled-components";
 
 export default function Player() {
     const audio = useMemo(()=>new Audio(jsMusic),[jsMusic])
@@ -51,7 +51,6 @@ export default function Player() {
     if(audio.currentTime===audio.duration){
         handleOnload();
     }
-
     
     return(
     <StPlayerWrapper>     
