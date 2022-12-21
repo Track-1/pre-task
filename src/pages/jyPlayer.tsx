@@ -56,6 +56,9 @@ export default function JyPlayer() {
       <PlayerWrapper onClick={controlAudio} ref={playBar}>
         <Playbar progress={progress} />
       </PlayerWrapper>
+      <DownloadBtn href={ditto} download>
+        DownLoad
+      </DownloadBtn>
     </Container>
   );
 }
@@ -132,4 +135,10 @@ const PlayerWrapper = styled.div`
   margin-top: 2rem;
 
   background-color: burlywood;
+`;
+
+const DownloadBtn = styled.a`
+  font-size: 2rem;
+
+  color: white;
 `;
