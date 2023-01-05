@@ -8,6 +8,7 @@ export default function JyPlayer() {
   const playBar = useRef<HTMLDivElement>(null);
   const [barWidth, setBarWidth] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
+  const [controlInterval, setControlInterval] = useState<NodeJS.Timer>();
   const [down, setDown] = useState<boolean>(false);
 
   useLayoutEffect(() => {
@@ -16,6 +17,11 @@ export default function JyPlayer() {
 
   function playAudio() {
     audio.play();
+    setControlInterval(
+      setInterval(() => {
+        goProgress();
+      }, 1000)
+    );
     audio.addEventListener("timeupdate", () => {
       goProgress();
     });
@@ -23,6 +29,7 @@ export default function JyPlayer() {
 
   function pauseAudio() {
     audio.pause();
+    clearInterval(controlInterval);
     audio.removeEventListener("timeupdate", () => {
       goProgress();
     });
@@ -69,6 +76,7 @@ export default function JyPlayer() {
         <PauseBtn onClick={pauseAudio}>pause</PauseBtn>
         <StopBtn onClick={stopAudio}>stop</StopBtn>
       </ButtonContainer>
+      <PlayerWrapper onClick={controlAudio} ref={playBar}>
       <PlayerWrapper
         onClick={controlAudio}
         onMouseDown={downMouse}
