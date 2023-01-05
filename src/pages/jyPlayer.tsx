@@ -9,6 +9,7 @@ export default function JyPlayer() {
   const [barWidth, setBarWidth] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
   const [controlInterval, setControlInterval] = useState<NodeJS.Timer>();
+  const [down, setDown] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     playBar.current && setBarWidth(playBar.current.offsetWidth);
@@ -21,11 +22,17 @@ export default function JyPlayer() {
         goProgress();
       }, 1000)
     );
+    audio.addEventListener("timeupdate", () => {
+      goProgress();
+    });
   }
 
   function pauseAudio() {
     audio.pause();
     clearInterval(controlInterval);
+    audio.removeEventListener("timeupdate", () => {
+      goProgress();
+    });
   }
 
   function stopAudio() {
@@ -46,6 +53,22 @@ export default function JyPlayer() {
     audio.currentTime = currentStop;
   }
 
+  function downMouse() {
+    setDown(true);
+  }
+
+  function upMouse() {
+    setDown(false);
+  }
+
+  function moveAudio(e: React.MouseEvent<HTMLDivElement>) {
+    if (down) {
+      const mousePoint = Math.round((e.nativeEvent.offsetX / barWidth) * 100);
+      const currentStop = (audio.duration * mousePoint) / 100;
+      audio.currentTime = currentStop;
+    }
+  }
+
   return (
     <Container>
       <ButtonContainer>
@@ -54,6 +77,12 @@ export default function JyPlayer() {
         <StopBtn onClick={stopAudio}>stop</StopBtn>
       </ButtonContainer>
       <PlayerWrapper onClick={controlAudio} ref={playBar}>
+      <PlayerWrapper
+        onClick={controlAudio}
+        onMouseDown={downMouse}
+        onMouseUp={upMouse}
+        onMouseMove={moveAudio}
+        ref={playBar}>
         <Playbar progress={progress} />
       </PlayerWrapper>
       <DownloadBtn href={ditto} download>
